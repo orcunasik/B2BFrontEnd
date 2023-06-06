@@ -5,7 +5,7 @@ import { HomeComponent } from './admin/home/home.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path:'admin',
     component:LayoutsComponent,
     children:[
       {
