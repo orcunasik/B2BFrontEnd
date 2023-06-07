@@ -28,31 +28,31 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a routerLink="/admin" routerLinkActive="active-link" class="nav-link active">
+            <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
               <i class="nav-icon fas fa-sharp fa-solid fa-house"></i>
               <p>Anasayfa</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a routerLink="/admin/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="nav-link">
               <i class="nav-icon far fa-brands fa-product-hunt"></i>
               <p>Ürünler</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a routerLink="/admin/price-lists" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="nav-link">
               <i class="nav-icon far fa-solid fa-hand-holding-dollar"></i>
               <p>Fiyat Listesi</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a routerLink="/admin/customers" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="nav-link">
               <i class="nav-icon far fa-solid fa-people-group"></i>
               <p>Müşteriler</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a routerLink="/admin/orders" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"  class="nav-link">
               <i class="nav-icon far fa-solid fa-arrow-up-wide-short"></i>
               <p>Siparişler</p>
             </a>
