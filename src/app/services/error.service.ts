@@ -21,7 +21,7 @@ export class ErrorService {
       this.toastr.error("Bilinmeyen Bir Hata Meydana Geldi!");
     }
     else {
-      this.toastr.error(err.error.message);
+      this.toastr.error(err.error.Message);
     }
   }
 }
