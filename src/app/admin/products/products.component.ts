@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from './services/product.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { ProductModel } from './models/product-model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,8 @@ export class ProductsComponent implements OnInit {
   products : ProductModel[] = [];
   constructor(
     private productService : ProductService,
-    private errorService : ErrorService
+    private errorService : ErrorService,
+    private toastrService : ToastrService
   ){}
 
   ngOnInit(): void {
@@ -28,5 +30,12 @@ export class ProductsComponent implements OnInit {
       this.errorService.errorHandler(err);
     })
   }
-
+  delete(product : ProductModel){
+    this.productService.delete(product).subscribe((res:any)=>{
+      this.toastrService.info(res.message);
+      this.getList();
+    },(err)=>{
+      this.errorService.errorHandler(err);
+    });
+  }
 }
