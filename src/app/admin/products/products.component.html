@@ -34,6 +34,17 @@
           </div>
         </div>
         <div class="card-body">
+          <div class="form-group offset-9">
+            <input
+              class="form-control"
+              type="search"
+              [(ngModel)]="filterText"
+              [ngModelOptions]="{standalone:true}"
+              placeholder="Arama"
+              aria-label="Search">
+          </div>
+        </div>
+        <div class="card-body">
           <table class="table table-hovered">
             <thead>
                 <tr>
@@ -44,7 +55,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products let index = index">
+                <tr *ngFor="let product of products 
+                | productPipe: filterText
+                let index = index">
                     <td [innerText]="index + 1"></td>
                     <td [innerText]="product.name"></td>
                     <td>
