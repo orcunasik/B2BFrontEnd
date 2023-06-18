@@ -3,6 +3,7 @@ import { ProductService } from './services/product.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { ProductModel } from './models/product-model';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -35,6 +36,18 @@ export class ProductsComponent implements OnInit {
     this.productService.delete(product).subscribe((res:any)=>{
       this.toastrService.info(res.message);
       this.getList();
+    },(err)=>{
+      this.errorService.errorHandler(err);
+    });
+  }
+  add(addForm : NgForm){
+    let product : ProductModel = new ProductModel();
+    product.name = addForm.value.productName;
+    product.id = 0;
+    this.productService.add(product).subscribe((res:any)=>{
+      this.toastrService.success(res.message);
+      this.getList();
+      addForm.reset();
     },(err)=>{
       this.errorService.errorHandler(err);
     });
