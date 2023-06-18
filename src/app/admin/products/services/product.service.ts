@@ -20,4 +20,8 @@ export class ProductService {
     let api = this.apiUrl + "Products/Delete";
     return this.httpClient.post(api,product);
   }
+  add(product:ProductModel){
+    let api = this.apiUrl + "Products/Add";
+    return this.httpClient.post(api,product);
+  }
 }
