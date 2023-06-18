@@ -4,6 +4,7 @@ import { ProductsComponent } from './products.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductPipe } from './pipe/product.pipe';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    FormsModule
   ],
   exports:[
     ProductsComponent
