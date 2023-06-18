@@ -34,14 +34,26 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="form-group offset-9">
-            <input
-              class="form-control"
-              type="search"
-              [(ngModel)]="filterText"
-              [ngModelOptions]="{standalone:true}"
-              placeholder="Arama"
-              aria-label="Search">
+          <div class="row">
+            <div class="col-md-6">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#productAddModel">Ürün Ekle
+              </button>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group offset-6">
+                <input
+                  class="form-control"
+                  type="search"
+                  [(ngModel)]="filterText"
+                  [ngModelOptions]="{standalone:true}"
+                  placeholder="Arama"
+                  aria-label="Search">
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-body">
@@ -77,6 +89,40 @@
       </div>
     </section>
   </div>
+
+<div class="modal fade" id="productAddModel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productAddModelLabel">Ürün Ekle</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm">
+          <div class="form-group">
+            <label for="name">Ürün Adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="productName"
+              ngModel
+              #productName
+              required
+              minlength="3"
+              placeholder="Ürün Adı">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="!addForm.valid" (click)="add(addForm)">Ürünü Kaydet</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <swal
     #deleteSwal
