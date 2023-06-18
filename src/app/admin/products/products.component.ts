@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsComponent implements OnInit {
 
   products : ProductModel[] = [];
+  filterText: string = "";
   constructor(
     private productService : ProductService,
     private errorService : ErrorService,
