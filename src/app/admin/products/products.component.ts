@@ -4,6 +4,7 @@ import { ErrorService } from 'src/app/services/error.service';
 import { ProductModel } from './models/product-model';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-products',
@@ -18,17 +19,22 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService : ProductService,
     private errorService : ErrorService,
-    private toastrService : ToastrService
+    private toastrService : ToastrService,
+    private helperService : HelperService
   ){}
 
   ngOnInit(): void {
     this.getList();
   }
 
+  exportExcel(){
+    let element = document.getElementById("excelTable");
+    let title = "Ürünler";
+    this.helperService.exportExcel(element,title);
+  }
   getList(){
     this.productService.getList().subscribe((res : any)=>{
       this.products = res.data;
-      console.log(this.products);
     },(err) =>{
       this.errorService.errorHandler(err);
     })
