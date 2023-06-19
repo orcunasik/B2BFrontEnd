@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 export class ProductsComponent implements OnInit {
 
   products : ProductModel[] = [];
+  product : ProductModel = new ProductModel();
   filterText: string = "";
   constructor(
     private productService : ProductService,
@@ -48,6 +49,24 @@ export class ProductsComponent implements OnInit {
       this.toastrService.success(res.message);
       this.getList();
       addForm.reset();
+    },(err)=>{
+      this.errorService.errorHandler(err);
+    });
+  }
+
+  getProduct(product:ProductModel){
+    this.productService.getById(product.id).subscribe((res:any)=>{
+      this.product = res.data;
+    },(err)=>{
+      this.errorService.errorHandler(err);
+    });
+  }
+
+  update(){
+    this.productService.update(this.product).subscribe((res:any)=>{
+      this.toastrService.success(res.message);
+      this.getList();
+      document.getElementById("updateModelCloseBtn").click();
     },(err)=>{
       this.errorService.errorHandler(err);
     });
