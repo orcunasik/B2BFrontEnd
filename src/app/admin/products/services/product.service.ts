@@ -24,7 +24,7 @@ export class ProductService {
 
   delete(product:ProductModel){
     let api = this.apiUrl + "Products/Delete";
-    return this.httpClient.post(api,product);
+    return this.httpClient.delete(api,{body:product});
   }
 
   add(product:ProductModel){
