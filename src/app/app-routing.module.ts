@@ -5,6 +5,7 @@ import { HomeComponent } from './admin/home/home.component';
 import { LoginComponent } from './admin/login/login.component';
 import { AuthGuard } from './admin/login/guard/auth.guard';
 import { ProductsComponent } from './admin/products/products.component';
+import { ProductImagesComponent } from './admin/products/product-images/product-images.component';
 
 const routes: Routes = [
   {
@@ -26,9 +27,21 @@ const routes: Routes = [
       },
       {
         path:'products',
-        component:ProductsComponent,
-        loadChildren: ()=> import('./admin/products/products.module')
-        .then(m => m.ProductsModule)
+        children:[
+          {
+            path:'',
+            component:ProductsComponent,
+            loadChildren: ()=> import('./admin/products/products.module')
+            .then(m => m.ProductsModule)
+          },
+          {
+            path:':id/images',
+            component:ProductImagesComponent,
+            loadChildren: ()=> import('./admin/products/product-images/product-images.module')
+            .then(m => m.ProductImagesModule)
+          }
+        ]
+        
       }
     ]
   }

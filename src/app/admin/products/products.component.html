@@ -77,9 +77,11 @@
                 | productPipe: filterText
                 let index = index">
                     <td [innerText]="index + 1"></td>
-                    <td [innerText]="product.name"></td>
                     <td>
-                        <img [src]="product.mainImageUrl == '' ? './assets/admin/img/imgNotFound.jpg' : product.mainImageUrl" alt="">
+                      <a [innerText]="product.name" routerLink="/admin/products/{{product.id}}/images" class="btn btn-default"></a>
+                    </td>
+                    <td>
+                        <img [src]="product.mainImageUrl == '' ? './assets/admin/img/imgNotFound.jpg' : './assets/admin/img/'+ product.mainImageUrl" alt="">
                     </td>
                     <td>
                         <button
