@@ -7,6 +7,7 @@ import { AuthGuard } from './admin/login/guard/auth.guard';
 import { ProductsComponent } from './admin/products/products.component';
 import { ProductImagesComponent } from './admin/products/product-images/product-images.component';
 import { PriceListsComponent } from './admin/price-lists/price-lists.component';
+import { PriceListDetailComponent } from './admin/price-lists/price-list-detail/price-list-detail.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,12 @@ const routes: Routes = [
             component:PriceListsComponent,
             loadChildren: () => import('./admin/price-lists/price-lists.module')
             .then(m => m.PriceListsModule)
+          },
+          {
+            path:':id',
+            component:PriceListDetailComponent,
+            loadChildren: () => import('./admin/price-lists/price-list-detail/price-list-detail.module')
+            .then(m => m.PriceListDetailModule)
           }
         ]
       }
