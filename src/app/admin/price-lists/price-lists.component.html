@@ -1,0 +1,207 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Fiyat Listesi</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a routerLink="/admin">Ana sayfa</a></li>
+              <li class="breadcrumb-item active">Fiyat Listesi</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Fiyat Listesi</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#addModel">Fiyat Ekle
+              </button>
+              <button
+                type="button"
+                class="btn btn-success mx-2"
+                (click)="exportExcel()"
+                >Excel Aktar
+              </button>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group offset-6">
+                <input
+                  class="form-control"
+                  type="search"
+                  [(ngModel)]="filterText"
+                  [ngModelOptions]="{standalone:true}"
+                  placeholder="Arama"
+                  aria-label="Search">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-hovered" id="excelTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fiyat Liste Adı</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let priceList of priceLists 
+                | priceListPipe: filterText
+                let index = index">
+                    <td [innerText]="index + 1"></td>
+                    <td>
+                      <a [innerText]="priceList.name" routerLink="/admin/price-lists/{{priceList.id}}" class="btn btn-default"></a>
+                    </td>
+                    <td>
+                        <button
+                          type="button"
+                          class="btn btn-warning"
+                          data-bs-toggle="modal"
+                          data-bs-target="#updateModel"
+                          (click)="getPriceList(priceList)">Güncelle
+                        </button>
+                        <button
+                          class="btn btn-danger mx-2"
+                          [swal]="deleteSwal"
+                          (confirm)="delete(priceList)">Sil
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<!--Add Modal-->
+<div class="modal fade" id="addModel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModelLabel">Fiyat Listesi Ekle</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm">
+          <div class="form-group">
+            <label for="name">Fiyat Listesi Adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="priceListName"
+              ngModel
+              #priceListName
+              required
+              minlength="3"
+              placeholder="Fiyat Listesi Adı">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!addForm.valid"
+          (click)="add(addForm)"
+          >Fiyat Listesini Kaydet
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="addModelCloseBtn"
+          >Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Update Modal-->
+<div class="modal fade" id="updateModel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModelLabel">Fiyat Listesini Güncelle</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm">
+          <div class="form-group">
+            <label for="name">Fiyat Lİstesi Adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="priceListName"
+              [(ngModel)]="priceList.name"
+              [ngModelOptions]="{standalone:true}"
+              #productName
+              required
+              minlength="3"
+              placeholder="Fiyat Listesi Adı">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-warning"
+          [disabled]="!updateForm.valid"
+          (click)="update()"
+          >Fiyat Listesini Güncelle
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="updateModelCloseBtn"
+          >Kapat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <swal
+    #deleteSwal
+    title="Sil"
+    text="Fiyat Listesini Silmek İstiyor musunuz?"
+    type="question"
+    [showCancelButton]="true"
+    [focusCancel]="true"
+    [swalOptions] = "{confirmButtonText: 'Sil', cancelButtonText:'Vazgeç'}">
+  </swal>

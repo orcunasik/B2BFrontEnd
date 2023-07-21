@@ -6,6 +6,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { AuthGuard } from './admin/login/guard/auth.guard';
 import { ProductsComponent } from './admin/products/products.component';
 import { ProductImagesComponent } from './admin/products/product-images/product-images.component';
+import { PriceListsComponent } from './admin/price-lists/price-lists.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,17 @@ const routes: Routes = [
           }
         ]
         
+      },
+      {
+        path:'price-lists',
+        children:[
+          {
+            path:'',
+            component:PriceListsComponent,
+            loadChildren: () => import('./admin/price-lists/price-lists.module')
+            .then(m => m.PriceListsModule)
+          }
+        ]
       }
     ]
   }
