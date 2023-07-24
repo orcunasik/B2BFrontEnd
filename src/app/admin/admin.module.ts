@@ -5,6 +5,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { LoginModule } from './login/login.module';
 import { ProductsModule } from './products/products.module';
 import { PriceListsModule } from './price-lists/price-lists.module';
+import { CustomersModule } from './customers/customers.module';
 
 
 
@@ -15,14 +16,16 @@ import { PriceListsModule } from './price-lists/price-lists.module';
     HomeModule,
     LayoutsModule,
     LoginModule,
-    ProductsModule
+    ProductsModule,
+    CustomersModule
   ],
   exports:[
     HomeModule,
     LayoutsModule,
     LoginModule,
     ProductsModule,
-    PriceListsModule
+    PriceListsModule,
+    CustomersModule
   ]
 })
 export class AdminModule { }

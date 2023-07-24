@@ -18,6 +18,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash"],
             "outputPath": "dist/b2-bfront-end",
             "index": "src/index.html",
             "main": "src/main.ts",

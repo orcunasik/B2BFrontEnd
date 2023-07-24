@@ -8,6 +8,7 @@ import { ProductsComponent } from './admin/products/products.component';
 import { ProductImagesComponent } from './admin/products/product-images/product-images.component';
 import { PriceListsComponent } from './admin/price-lists/price-lists.component';
 import { PriceListDetailComponent } from './admin/price-lists/price-list-detail/price-list-detail.component';
+import { CustomersComponent } from './admin/customers/customers.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,17 @@ const routes: Routes = [
             component:PriceListDetailComponent,
             loadChildren: () => import('./admin/price-lists/price-list-detail/price-list-detail.module')
             .then(m => m.PriceListDetailModule)
+          }
+        ]
+      },
+      {
+        path : 'customers',
+        children :[
+          {
+            path:'',
+            component : CustomersComponent,
+            loadChildren : () => import('./admin/customers/customers.module')
+            .then(m => m.CustomersModule)
           }
         ]
       }
