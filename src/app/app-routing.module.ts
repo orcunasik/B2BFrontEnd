@@ -11,6 +11,7 @@ import { PriceListDetailComponent } from './admin/price-lists/price-list-detail/
 import { CustomersComponent } from './admin/customers/customers.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { OrderDetailsComponent } from './admin/orders/order-details/order-details.component';
+import { ProfileComponent } from './admin/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,17 @@ const routes: Routes = [
             component:OrderDetailsComponent,
             loadChildren: () => import('./admin/orders/order-details/order-details.module')
             .then(m => m.OrderDetailsModule)
+          }
+        ]
+      },
+      {
+        path : 'profile',
+        children :[
+          {
+            path: '',
+            component : ProfileComponent,
+            loadChildren: () => import('./admin/profile/profile.module')
+            .then(m => m.ProfileModule)
           }
         ]
       }
