@@ -21,7 +21,7 @@ const routes: Routes = [
     .then(m => m.LoginModule)
   },
   {
-    path:'admin',
+    path:'',
     component:LayoutsComponent,
     canActivateChild : [AuthGuard],
     children:[

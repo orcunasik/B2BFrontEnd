@@ -31,7 +31,7 @@ export class AuthService {
     this.httpClient.post(api,adminLoginModel).subscribe((res:any) =>{
       this.adminTokenModel = res.data;
       localStorage.setItem("adminToken",this.adminTokenModel.adminAccessToken);
-      this.router.navigate(["/admin"]);
+      this.router.navigate(["/"]);
       this.toastr.success("Giriş Başarılı");
     },
     (err)=>{
