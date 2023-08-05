@@ -22,7 +22,7 @@ export class CustomersComponent {
   customer : CustomerModel = new CustomerModel();
 
   filterText : string = "";
-
+  newPassword : string = "";
   constructor(
     private customerService : CustomersService,
     private errorService : ErrorService,
@@ -154,10 +154,10 @@ export class CustomersComponent {
     .subscribe();
   }
 
-  changePassword(password : any){
+  changePassword(){
     let customer = new CustomerModel();
     customer.id = this.customer.id;
-    customer.password = password.value;
+    customer.password = this.newPassword;
     this.customerService.changePasswordByAdminPanel(customer)
       .pipe(
         tap((res: any)=>{
