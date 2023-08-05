@@ -262,8 +262,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form #updateForm="ngForm">
+      <form #updateForm="ngForm">
+        <div class="modal-body">
           <div class="form-group">
             <label for="password">Şifre</label>
             <input
@@ -271,18 +271,18 @@
               class="form-control"
               id="password"
               name="password"
-              ngModel
+              [(ngModel)]="newPassword"
+              [ngModelOptions]="{standalone : true}"
               #password
               required>
           </div>
-        </form>
-      </div>
+        </div>
       <div class="modal-footer">
         <button
           type="button"
           class="btn btn-warning"
           [disabled]="!updateForm.valid"
-          (click)="changePassword(password)"
+          (click)="changePassword()"
           >Müşteri Şifre Güncelle
         </button>
         <button
@@ -293,6 +293,7 @@
           >Kapat
         </button>
       </div>
+    </form>
     </div>
   </div>
 </div>
