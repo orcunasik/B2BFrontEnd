@@ -1,5 +1,4 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -14,17 +13,12 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Fiyat Listesi Detayı</h3>
-
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -80,9 +74,9 @@
                     <td [innerText]="index + 1"></td>
                     <td [innerText]="priceListDetail.productName"></td>
                     <td>
-                        <input type="text"
+                        <input type="number"
                         class="form-control"
-                        autocomplete="off"
+                        
                         [(ngModel)]="priceListDetail.price"
                         [ngModelOptions]="{standalone :true}">
                     </td>
@@ -138,7 +132,6 @@
             <input
               type="text"
               class="form-control"
-              id="name"
               name="price"
               ngModel
               #price
@@ -168,55 +161,7 @@
   </div>
 </div>
 
-<!--Update Modal-->
-<!-- <div class="modal fade" id="updateModel" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateModelLabel">Ürünü Güncelle</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form #updateForm="ngForm">
-          <div class="form-group">
-            <label for="name">Ürün Adı</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              name="priceListName"
-              [(ngModel)]="priceList.name"
-              [ngModelOptions]="{standalone:true}"
-              #productName
-              required
-              minlength="3"
-              placeholder="Fiyat Listesi Adı">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-warning"
-          [disabled]="!updateForm.valid"
-          (click)="update()"
-          >Fiyat Listesini Güncelle
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          id="updateModelCloseBtn"
-          >Kapat
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-  <swal
+<swal
     #deleteSwal
     title="Sil"
     text="Ürün Fiyatını Silmek İstiyor musunuz?"
@@ -224,5 +169,4 @@
     [showCancelButton]="true"
     [focusCancel]="true"
     [swalOptions] = "{confirmButtonText: 'Sil', cancelButtonText:'Vazgeç'}">
-  </swal>
-
+</swal>
