@@ -4,7 +4,7 @@ import { PriceListDetailService } from './services/price-list-detail.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { HelperService } from 'src/app/services/helper.service';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, of, tap, throwError } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../products/services/product.service';
@@ -24,6 +24,7 @@ export class PriceListDetailComponent {
 
   filterText : string = "";
   priceListId : number = 0;
+
   constructor(
     private priceListDetailService : PriceListDetailService,
     private errorService : ErrorService,
@@ -49,15 +50,15 @@ export class PriceListDetailComponent {
 
   getList(){
     this.priceListDetailService.getList(this.priceListId)
-      .pipe(
-        catchError(err =>{
-          this.errorService.errorHandler(err);
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res : any)=>{
-        this.priceListDetails = res.data;
-      });
+    .pipe(
+      catchError(err =>{
+        this.errorService.errorHandler(err);
+        return throwError(() => err);
+      })
+    )
+    .subscribe((res : any)=>{
+      this.priceListDetails = res.data;
+    });
   }
 
   getProductList(){
@@ -105,33 +106,11 @@ export class PriceListDetailComponent {
       .subscribe();
   }
 
-  // getPriceListDetail(priceListDetail:PriceListDetailModel){
-  //   this.priceListDetailService.getById(priceListDetail.id)
-  //     .pipe(
-  //       catchError(err =>{
-  //         this.errorService.errorHandler(err);
-  //         return throwError(() =>err);
-  //       })
-  //     )
-  //     .subscribe((res:any)=>{
-  //       this.priceListDetail = res.data;
-  //     });
-  // }
-
   update(priceListDetail : PriceListDetailModel){
     this.priceListDetailService.update(priceListDetail)
-      .pipe(
-        tap((res: any)=>{
-          this.toastrService.success(res.message);
-          this.getList();
-          document.getElementById("updateModelCloseBtn").click();
-        }),
-        catchError(err => {
-          this.errorService.errorHandler(err);
-          return throwError(() => err);
-        })
-      )
-    .subscribe();
+    .subscribe({
+      next: (res:any) => this.toastrService.success(res.message),
+      error : (err:any) => this.errorService.errorHandler(err)
+    });
   }
-
 }
