@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { OrderDetailModel } from '../models/order-detail-model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
